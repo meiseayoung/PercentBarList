@@ -1,0 +1,37 @@
+.custom-list{
+    font-size: 12px;
+}
+.custom-list li{
+    list-style: none;
+}
+.custom-list .list-item-name{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    text-indent: 6px;
+}
+.custom-list .list-item-percent-frontend{
+    transition: width 1s;
+}
+.custom-list .list-item>div{
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    float: left;
+    font-size: 0.23333333333333334rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.custom-list .list-item-value{
+    text-indent: 1em;
+}
+/*.custom-list  .list-item{*/
+    /*cursor: pointer;*/
+
+/*}*/
+.layer-list .layer-name{
+    line-height: 30px;
+}
+.list-item-percent{
+    cursor: pointer;
+}
