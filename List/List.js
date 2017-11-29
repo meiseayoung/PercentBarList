@@ -97,5 +97,11 @@ var List = BaseComponent.extend({
             var index = $(this).attr("data-index");
             me.fire("itemClick", me.config.list[index]);
         });
+    },
+    openEnterTimer:function(fn,time){
+        this.enterTimer = setTimeout(fn,time);
+    },
+    clearEnterTimer:function(){
+        clearTimeout(this.enterTimer);
     }
 })
