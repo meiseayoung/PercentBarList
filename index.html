@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./List/List.css">
+    <script src="./Class.js"></script>
+    <script src="./jquery-1.11.3.min.js"></script>
+    <script src="./BaseComponent.js"></script>
+    <script src="./List/List.js"></script>
+</head>
+<body>
+    <div id="list-container">
+
+    </div>
+    <script>
+        var list = new List({
+            renderTo:"#list-container",
+            list:[{
+                name:"完成进度",
+                value:"1/5",
+                percent:20
+            },{
+                name:"完成进度",
+                value:"2/5",
+                percent:40
+            },{
+                name:"完成进度",
+                value:"3/5",
+                percent:60
+            },{
+                name:"完成进度",
+                value:"4/5",
+                percent:80
+            },{
+                name:"完成进度",
+                value:"5/5",
+                percent:100
+            }]
+        })
+    </script>
+</body>
+</html>
