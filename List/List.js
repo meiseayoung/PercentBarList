@@ -74,6 +74,7 @@ var List = BaseComponent.extend({
      */
     _createItem: function (item) {
         var me = this;
+        item.value === undefined && (item.value = "--");
         var itemHTML = `<div class="list-item" style="height:100%;">
                             <div class="list-item-name" style="width:${me.config.itemNameWidth}px;text-align:${me.config.itemTextAlign};line-height:${me.config.itemHeight}px;color:${me.config.itemNameColor}"><span>${item.name}</span></div>
                             <div class="list-item-percent" style="position:relative;width:${me.config.itemPercentWidth}px;">
@@ -93,9 +94,42 @@ var List = BaseComponent.extend({
             console.warn("组件渲染目标不存在,请检查传入的renderTo配置项");
             return;
         }
+        function fireItemEnter(me){
+                this.fire("itemEnter",$(this.config.renderTo).siblings(".layer-name").find(".layer-list-showmore"));
+        }
+        // var throttleFn = _.throttle(fireItemEnter,2000);
+        var throttleFn = _.throttle(fireItemEnter.bind(me),700);
+
         $(this.config.renderTo).on("click", "li", function (e) {
             var index = $(this).attr("data-index");
             me.fire("itemClick", me.config.list[index]);
+        });
+       
+
+        $(this.config.renderTo).closest('.layer-list').on("mouseenter",function (e) {                 
+                me.clearEnterTimer();
+                me.openEnterTimer(throttleFn,700);
+        });
+        $(this.config.renderTo).closest('.layer-list').on("mousemove", function (e) {
+            $("#tipLayer2").css({
+                    display:"block",
+                    left: (window.screen.width - e.pageX + 10) < 340 ? e.pageX - 300 :  e.pageX + 10,
+                    top:e.pageY + 10
+            });
+        });
+        $(this.config.renderTo).closest('.layer-list').on("mouseleave", function (e) {
+           
+            // var index = $(this).parent().parent().attr("data-index");
+            // me.fire("itemLeave", me.config.list[index]);
+             $("#tipLayer2").css({
+                display:"none",
+                left:e.pageX,
+                top:e.pageY
+            });
+            me.clearEnterTimer();
+            tipLayer2.update([]);
+            $(me.config.renderTo).attr("mouseIn","false");
+            // me.fire("itemLeave",$(me.config.renderTo).siblings(".layer-name").find(".layer-list-showmore"));
         });
     },
     openEnterTimer:function(fn,time){
